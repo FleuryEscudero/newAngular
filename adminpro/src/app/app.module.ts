@@ -9,6 +9,7 @@ import { APP_ROUTES } from './app.routes';
 
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 // Components
 
@@ -21,13 +22,14 @@ import { RegisterComponent } from './login/register.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     APP_ROUTES,
     PagesModule,
+    FormsModule
    
   ],
   providers: [],
