@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-increment',
@@ -29,12 +37,11 @@ export class IncrementComponent implements OnInit {
   changeValue(changeValue: number) {
     if (this.porcentaje >= 100 && changeValue > 0) {
       this.porcentaje = 100;
-      console.log('ya llegaste al maximo');
+
       return;
     }
     if (this.porcentaje <= 0 && changeValue < 0) {
       this.porcentaje = 0;
-      console.log('ya llegaste al minimo');
       return;
     }
     this.porcentaje = this.porcentaje + changeValue;
