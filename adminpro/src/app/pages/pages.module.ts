@@ -12,6 +12,8 @@ import { Graphics1Component } from './graphics1/graphics1.component';
 import { IncrementComponent } from '../components/increment/increment.component';
 import { GraficasComponent } from '../components/graficas/graficas.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     PagesComponent,
     IncrementComponent,
     GraficasComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    PromisesComponent,
+    RxjsComponent
   ],
   exports: [
     DashboardComponent,
