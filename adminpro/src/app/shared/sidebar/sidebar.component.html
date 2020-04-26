@@ -24,7 +24,7 @@
                                 <span class="hide-menu">{{menu.title}} <span class="label label-rouded label-themecolor pull-right">4</span></span>
                             </a>
                             <ul *ngFor="let submenu of menu.submenu" aria-expanded="false" class="collapse">
-                                <li><a [routerLink]="[ submenu.url ]" routerLinkActive="active" >{{submenu.title}} </a></li>
+                                <li><a class="pointer" (click)="_userService.logOut()" >{{submenu.title}} </a></li>
                             </ul>
                         </li>
                     </ul>
