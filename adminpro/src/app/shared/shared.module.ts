@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PipesModule } from '../pipes/pipes.module';
 
 import { RouterModule } from '@angular/router';
 
@@ -15,10 +16,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
     SidebarComponent,
     BreadcrumbsComponent,
   ],
-  imports: [
-      RouterModule,
-    CommonModule
-],
+  imports: [RouterModule, CommonModule, PipesModule],
   exports: [
     NopagefoundComponent,
     HeaderComponent,

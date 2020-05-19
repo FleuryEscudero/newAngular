@@ -7,6 +7,7 @@ import {
   SidebarService,
   UserService,
   LoginGuard,
+  UploadService,
 } from './service.index';
 
 // Services
@@ -20,6 +21,7 @@ import {
     SidebarService,
     UserService,
     LoginGuard,
+    UploadService
   ],
 })
 export class ServiceModule {}

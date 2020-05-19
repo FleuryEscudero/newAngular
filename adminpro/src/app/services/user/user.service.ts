@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
 import { HttpClient } from '@angular/common/http';
-import swal from 'sweetalert';
-import { map } from 'rxjs/operators';
 
 import { URL_SERVICES } from 'src/app/config/config';
+
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { UploadService } from '../upload/upload.service';
+
+import swal from 'sweetalert';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +17,11 @@ export class UserService {
   user: User;
   token: string;
 
-  constructor(public http: HttpClient, public router: Router) {
+  constructor(
+    public http: HttpClient,
+    public router: Router,
+    public _uploadService: UploadService
+  ) {
     this.LoadToken();
   }
   createUser(user: User) {
@@ -27,11 +34,11 @@ export class UserService {
     );
   }
 
-  LoadToken(){
-    if(localStorage.getItem('token')){
+  LoadToken() {
+    if (localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
       this.user = JSON.parse(localStorage.getItem('user'));
-    }else {
+    } else {
       this.token = '';
       this.user = null;
     }
@@ -75,7 +82,7 @@ export class UserService {
     );
   }
 
-  logOut(){
+  logOut() {
     this.user = null;
     this.token = '';
     localStorage.removeItem('token');
@@ -83,5 +90,30 @@ export class UserService {
     this.router.navigate(['/login']);
   }
 
+  updateUser(user: User) {
+    const url = URL_SERVICES + `/user/${this.user['_id']}?token=${this.token}`;
 
+    return this.http.put(url, user).pipe(
+      map((res: any) => {
+        const id = res._id;
+        this.saveLocalStorage(id, this.token, res.user);
+        swal('Usuario Actualizado!', user.email, 'success');
+        return true;
+      })
+    );
+  }
+  imageChange(file: File, id: string) {
+    this._uploadService
+      .uploadFile(file, 'users', id)
+      .then((res: any) => {
+        // console.log(res)
+        this.user.image = res.user.image;
+        console.log(this.user.image);
+        this.saveLocalStorage(id, this.token, res.user);
+        swal('Imagen de Usuario Actualizado!', this.user.name, 'success');
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  }
 }
