@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user.model';
 import { UploadService } from '../upload/upload.service';
 
 import swal from 'sweetalert';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -91,12 +91,16 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    const url = URL_SERVICES + `/user/${this.user['_id']}?token=${this.token}`;
-
+    // const url = URL_SERVICES + `/user/${this.user['_id']}?token=${this.token}`;
+     const url = URL_SERVICES + `/user/${user['_id']}?token=${this.token}`;
+    console.log(user._id, '=', this.user._id);
     return this.http.put(url, user).pipe(
       map((res: any) => {
-        const id = res._id;
-        this.saveLocalStorage(id, this.token, res.user);
+        if (user._id === this.user._id) {
+          const id = res._id;
+          this.saveLocalStorage(id, this.token, res.user);
+        }
+
         swal('Usuario Actualizado!', user.email, 'success');
         return true;
       })
@@ -115,5 +119,29 @@ export class UserService {
       .catch((res) => {
         console.log(res);
       });
+  }
+  loadUsers(from: number = 0) {
+    let url = URL_SERVICES + `/user?from=${from}`;
+
+    return this.http.get(url);
+  }
+
+  searchUsers(data: string) {
+    let url = URL_SERVICES + `/search/collection/user/${data}`;
+    return this.http.get(url).pipe(map((res: any) => res.user));
+  }
+
+  deleteUser(id: string) {
+    let url = URL_SERVICES + `/user/${id}?token=${this.token}`;
+    return this.http.delete(url).pipe(
+      map((res) => {
+        swal(
+          'Usuario Borrado',
+          'El usuario ha sido eliminado correctamente',
+          'success'
+        );
+        return true;
+      })
+    );
   }
 }

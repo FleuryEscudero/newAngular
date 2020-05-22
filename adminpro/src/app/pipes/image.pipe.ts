@@ -9,12 +9,10 @@ export class ImagePipe implements PipeTransform {
     let url = URL_SERVICES + '/img';
 
     if (!image) {
-      console.log('paso')
       return url + '/users/x';
     }
 
     if (image.indexOf('https') >= 0) {
-    console.log('si es google paso por aqui')  
       return image;
     }
 

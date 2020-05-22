@@ -1,37 +1,50 @@
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="user-profile">
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="user.image | image" alt="user" /><span class="hide-menu">{{_userService.user.name}} </span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a routerLink='/profile' routerLinkActive="active">Perfil de Usuario </a></li>
-                                <li><a href="javascript:void()">My Balance</a></li>
-                                <li><a href="javascript:void()">Inbox</a></li>
-                                <li><a routerLink="/accountSettings" routerLinkActive="active">Account Setting</a></li>
-                                <li><a [routerLink]="['/login']" >Logout</a></li>
-                            </ul>
+<!-- ============================================================== -->
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="user-profile">
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="user.image | image" alt="user" /><span class="hide-menu">{{ _userService.user.name }}
+            </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <a routerLink="/profile" routerLinkActive="active">Perfil de Usuario
+              </a>
                         </li>
-                        <li class="nav-devider"></li>
-                        <li class="nav-small-cap">PERSONAL</li>
-                        <li *ngFor="let menu of _sidebar.menu"> 
-                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
-                                <i [class]="menu.icon"></i>
-                                <span class="hide-menu">{{menu.title}} <span class="label label-rouded label-themecolor pull-right">4</span></span>
-                            </a>
-                            <ul *ngFor="let submenu of menu.submenu" aria-expanded="false" class="collapse">
-                                <li><a class="pointer" (click)="_userService.logOut()" >{{submenu.title}} </a></li>
-                            </ul>
+                        <li><a href="javascript:void()">My Balance</a></li>
+                        <li><a href="javascript:void()">Inbox</a></li>
+                        <li>
+                            <a routerLink="/accountSettings" routerLinkActive="active">Account Setting</a
+              >
+            </li>
+            <li><a [routerLink]="['/login']">Logout</a></li>
+                    </ul>
+                </li>
+                <li class="nav-devider"></li>
+                <li class="nav-small-cap">PERSONAL</li>
+                <li *ngFor="let menu of _sidebar.menu">
+                    <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
+                        <i [class]="menu.icon"></i>
+                        <span class="hide-menu">{{ menu.title }}
+              <span class="label label-rouded label-themecolor pull-right">{{
+                menu.submenu.length
+              }}</span></span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li *ngFor="let submenu of menu.submenu">
+                            <a class="pointer" [routerLink]="[submenu.url]" routerLinkActive="active">{{ submenu.title }}
+              </a>
                         </li>
                     </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->

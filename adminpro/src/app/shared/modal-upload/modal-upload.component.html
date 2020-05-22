@@ -1,0 +1,41 @@
+<div class="black-bg animated fadeIn" [ngClass]="_modalUploadService.hidden">
+    <div class="modal" style="display: block;" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Actualizar Imagen</h5>
+                    <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12 col-md-12 col-xs-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="form p-t-20">
+                                    <div class="form-group">
+                                        <div style="text-align: center;">
+                                            <img *ngIf="!tempImage" class="img-circle" [src]="'xxx' | image" style="width: 50%; align-items: center;" />
+                                            <img *ngIf="tempImage" class="img-circle" [src]="tempImage" style="width: 50%; align-items: center;" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input (change)="imageSelected($event.target.files[0])" type="file" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button (click)="imageChange()" [disabled]="!tempImage" type="button" class="btn btn-success">
+              <i class="fa fa-save mr-1"></i>Actualizar
+            </button>
+                    <button (click)="closeModal()" type="button" class="btn btn-danger">
+              Cerrar
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
